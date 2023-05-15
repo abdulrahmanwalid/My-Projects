@@ -7,3 +7,7 @@ What is the relationship between GDP per capita and current health expenditure p
 How does the distribution of current health expenditure per capita differ between countries with low, medium, and high life expectancy?
 What is the relationship between life expectancy and economic status within different world regions?
 Can we predict life expectancy based on GDP per capita and current health expenditure per capita?
+
+
+So I will add the link for my colab: https://colab.research.google.com/drive/1_-ekVIun6nrizjEkt6OX4bg6txhLEEAS?usp=sharing
+as the ploly graphs are not showig at all.
