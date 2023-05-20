@@ -10,4 +10,5 @@ Can we predict life expectancy based on GDP per capita and current health expend
 
 
 So I will add the link for my colab: https://colab.research.google.com/drive/1_-ekVIun6nrizjEkt6OX4bg6txhLEEAS?usp=sharing
-as the ploly graphs are not showig at all.
+as the plotly graphs are not showig at all.
+Tableau : https://public.tableau.com/shared/TH6C85963?:display_count=n&:origin=viz_share_link
