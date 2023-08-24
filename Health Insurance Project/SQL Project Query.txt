@@ -1,0 +1,119 @@
+-- Data preprocessing
+SELECT * FROM `health`;
+
+-- Checking for null values
+SELECT 'age', count(*) FROM health WHERE `age` IS NULL
+UNION
+SELECT 'sex', count(*) FROM health WHERE `sex` IS NULL
+UNION
+SELECT 'weight', count(*) FROM health WHERE `weight` IS NULL
+UNION
+SELECT 'bmi', count(*) FROM health WHERE `bmi` IS NULL
+UNION
+SELECT 'hereditary_diseases', count(*) FROM health WHERE `hereditary_diseases` IS NULL
+UNION
+SELECT 'no_of_dependents', count(*) FROM health WHERE `no_of_dependents` IS NULL
+UNION
+SELECT 'smoker', count(*) FROM health WHERE `smoker` IS NULL
+UNION
+SELECT 'city', count(*) FROM health WHERE `city` IS NULL
+UNION
+SELECT 'bloodpressure', count(*) FROM health WHERE `bloodpressure` IS NULL
+UNION
+SELECT 'diabetes', count(*) FROM health WHERE `diabetes` IS NULL
+UNION
+SELECT 'regular_ex', count(*) FROM health WHERE `regular_ex` IS NULL
+UNION
+SELECT 'job_title', count(*) FROM health WHERE `job_title` IS NULL
+UNION
+SELECT 'claim', count(*) FROM health WHERE `claim` IS NULL;
+
+-- Having performed median imputation on excel and updated the age and bmi and joined 
+
+-- Data Analysis 
+-- Demographics Analysis
+
+SELECT age, ROUND(AVG(claim)) AS avg_claim
+FROM health
+GROUP BY age
+ORDER BY avg_claim DESC;
+
+SELECT city, ROUND(AVG(bmi)) AS bmi
+FROM health
+GROUP BY city
+ORDER BY bmi DESC;
+
+Select job_title, count(job_title) as number_of from health 
+group by job_title;
+
+
+SELECT sex, 
+       COUNT(*) / (SELECT COUNT(*) FROM health) * 100 AS percentage_of_gender
+FROM health
+GROUP BY sex
+ORDER BY percentage_of_gender DESC;
+
+-- Health Analysis 
+
+Select smoker, round(sum(claim)) as total_claims_for_smoker_and_nonsmoker from health 
+group by smoker
+order by total_claims_for_smoker_and_nonsmoker desc;
+
+select count(diabetes) as no_of_diabetic_patients ,round(AVG(claim)) as avg_claim_diabetes 
+from health 
+where diabetes=1;
+
+SELECT 
+    regular_ex as excersising_regurlarly,
+    round(AVG(claim)) AS average_claim
+FROM health
+GROUP BY regular_ex;
+
+SELECT 
+    no_of_dependents,
+    round(AVG(claim)) AS average_claim,
+    COUNT(*) AS number_of_policyholders
+FROM health
+GROUP BY no_of_dependents
+ORDER BY no_of_dependents;
+
+-- Occupational and Geographical Analysis
+
+SELECT 
+    job_title,
+    round(AVG(claim)) AS average_claim,
+    COUNT(*) AS jobtitles
+FROM health
+GROUP BY job_title
+ORDER BY average_claim desc;
+
+(SELECT 
+    city,
+    ROUND(AVG(claim)) AS average_claim
+FROM health
+GROUP BY city
+ORDER BY average_claim DESC
+LIMIT 1)
+UNION
+(SELECT 
+    city,
+    ROUND(AVG(claim)) AS average_claim
+FROM health
+GROUP BY city
+ORDER BY average_claim ASC
+LIMIT 1);
+
+
+-- Hereditary Factors 
+SELECT 
+    hereditary_diseases,
+    ROUND(AVG(claim)) AS average_claim
+FROM health
+GROUP BY hereditary_diseases
+order by average_claim desc ;
+
+
+
+
+
+
